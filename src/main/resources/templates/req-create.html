@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание</title>
+    <style>
+  body {
+    background: #E0FFFF;
+    color: #606;
+  }
+</style>
+</head>
+<body>
+<form action="#" th:action="@{/req-create}" th:object="${requests}" method="post">
+
+<label for="disp">Введите описание заявки на ремонт ПК</label>
+<input type="text" th:field="*{disp}" id="disp" placeholder="disp"/>
+<input type="submit" value="Оформить заявку">
+</form>
+</body>
+</html>

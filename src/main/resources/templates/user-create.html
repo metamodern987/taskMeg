@@ -6,7 +6,7 @@
     <style>
   body {
     background: #BBFBFE;
-    color: #fc0;
+    color: #606;
   }
 </style>
 </head>
@@ -14,8 +14,8 @@
 <form action="#" th:action="@{/user-create}" th:object="${user}" method="post">
     <label for="id">id</label>
     <input type="number" th:field="*{id}" id="id" placeholder="id">
-    <label for="link">link</label>
-    <input type="text" th:field="*{link}" id="link" placeholder="link">
+    <label for="username">username</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="username">
     <input type="submit" value="Create User">
 </form>
 </body>

@@ -1,6 +1,8 @@
 package metamodern7.testspringboot.controller;
 
+import metamodern7.testspringboot.model.Req;
 import metamodern7.testspringboot.model.User;
+import metamodern7.testspringboot.service.ReqService;
 import metamodern7.testspringboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,12 @@ import java.util.List;
 @Controller                   //говорим спрингу что это и есть контроллер
 public class UserController {
 
-
+    private final ReqService reqService;
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(ReqService reqService, UserService userService) {
+        this.reqService = reqService;
         this.userService = userService;
     }
 
@@ -31,7 +34,7 @@ public class UserController {
     public String findAll(Model model){           //передаем юзера из класса на страницу хтмл через model(аналог мапы куда добавляем атрибуты)
         List<User> users = userService.findAll();
         model.addAttribute("users", users);    //передаем в model users, который указан на хтмл странице и сюда положи юзера которого получили из БД методом findAll
-        return "user-string";                    //возвращаем путь к нашему html файлу, где реализуем логику
+        return "user-string";                    //возвращаем путь к нашему хтмл файлу, где реализуем логику
 
     }
 
@@ -65,6 +68,24 @@ public class UserController {
     public String updateUser(User user) {
         userService.saveUser(user);
         return "redirect:/users";
+    }
+    @GetMapping("/requests")
+    public String findAllReq(Model model) {          //передаем заявки из класса на страницу хтмл
+        List<Req> requests = reqService.findAll();
+        model.addAttribute("requests", requests);  //связываем с нашей страничкой хтмл req-disp
+        return "req-disp";
+    }
+
+    @GetMapping("/req-create")                      //для формы создания новой заявки
+    public String createReqForm(Req req) {
+        return "req-create";
+    }
+
+    @PostMapping("/req-create")                             //методом HTTP POST будем добавлять новую заявку в БД
+    public String createReq(Req req){
+        reqService.saveReq(req);                //Сохранили
+        return "redirect:/requests";           //после сохранения верни нас на страницу хтмл просмотра заявок requests
+
     }
 
 }

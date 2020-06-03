@@ -14,13 +14,13 @@ import javax.persistence.Table;
 
 @Data
 @Entity                          //связка данного класса с таблицей БД
-@Table(name = "soundcloud")     //именно так связанно - имя таблчики БД
+@Table(name = "allusers")
 public class User {
     @Id
     private Long id;
 
-    @Column(name = "link")      //наше поле в табличке
-    private String link;
+    @Column(name = "username")      //столбец в табличке для имени юзера
+    private String username;
 
 
 }

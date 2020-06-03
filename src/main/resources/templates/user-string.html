@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>Все пользователи</title>
 <style>
   body {
     background: #E0FFFF;
-    color: #fc0;
+    color: #606;
   }
 </style>
 </head>
@@ -13,25 +13,27 @@
 <div th:switch="${users}">
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
-        <h2>Users</h2>
+        <h2>Пользователи</h2>
         <table>
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Link</th>
+                <th>username</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}"></td>
-                <td th:text="${user.link}"></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+                <td th:text="${user.username}"></td>
+                <td><a th:href="@{user-update/{id}(id=${user.id})}">Изменить</a></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Удалить</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/user-create">Create user</a></p>
+    <p><a href="/user-create">Создать</a></p>
+    <tr th:url value="login?logout" var="logoutUrl"/>
+    <p><a href="${logoutUrl}">Выйти</a></p>
 </div>
 </body>
 </body>

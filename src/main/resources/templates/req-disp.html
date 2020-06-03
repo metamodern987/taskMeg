@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки на ремонт ПК</title>
+    <style>
+  body {
+    background: #E0FFFF;
+    color: #606;
+  }
+</style>
+</head>
+<div th:switch="${requests}">
+    <h2 th:case="null">Заявок нет!</h2>
+    <div th:case="*">
+        <h2>Заявки</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Номер заявки</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="requests : ${requests}">
+                <td th:text="${requests.id}"></td>
+                <td th:text="${requests.disp}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/req-create">Создать новую заявку на ремонт ПК</a></p>
+</div>
+        </body>
+</html>
